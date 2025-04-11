@@ -21,6 +21,11 @@ contract TestArcane is Test {
         //Instead we can hash those string and compare the hashes of these strings using abi.encodeWith
     }
 
+    function testSymbolIsCorrect() public view {
+        string memory expectedSymbol = "ARC";
+        string memory actualSymbol = arcane.symbol();
+    }
+
     
 
 
