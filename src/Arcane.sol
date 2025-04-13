@@ -2,6 +2,7 @@
 pragma solidity 0.8.19;
 
 import {ERC721} from "../lib/openzepplin-contracts/contracts/token/ERC721/ERC721.sol";
+import {console} from "forge-std/console.sol";
 
 contract Arcane is ERC721 {
     uint256 private s_nftMintCount;
@@ -17,11 +18,11 @@ contract Arcane is ERC721 {
         s_nftMintCount++;
     }
 
-    function tokenURI(uint256 /*tokenUri*/ ) public pure override returns (string memory) {
-        return "ipfs://QmPMc4tcBsMqLRuCQtPmPe84bpSjrC3Ky7t3JWuHXYB4aS/8929";
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        return s_tokenIdToUri[tokenId];
     }
 
-    function mintCount() public view returns (uint256){
+    function mintCount() public view returns (uint256) {
         return s_nftMintCount;
     }
 }
