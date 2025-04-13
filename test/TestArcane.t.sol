@@ -47,5 +47,6 @@ contract TestArcane is Test {
         string memory userTokenUri = arcane.tokenURI(tokenId);
         assertEq(keccak256(abi.encodePacked(userTokenUri)), keccak256(abi.encodePacked(CAP_NFT)));
         assertEq(arcane.ownerOf(tokenId), USER);
+        assertEq(arcane.balanceOf(USER), 1);
     }
 }
