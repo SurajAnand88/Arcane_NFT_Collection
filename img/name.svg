@@ -1,0 +1,10 @@
+<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+<!-- Background -->
+<rect width="200" height="100" fill="#f4f4f4" />
+
+<!-- Text Styling -->
+<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+      font-family="Arial, sans-serif" font-size="24" fill="#007BFF" stroke="#000" stroke-width="0.5">
+  Suraj
+</text>
+</svg>
