@@ -32,7 +32,7 @@ contract Arcane is ERC721 {
         s_nftMintCount++;
     }
 
-    function flipMood(uint256 tokenId) public  {
+    function flipMood(uint256 tokenId) public {
         //only Owner can flip the mood
         if (!_isApprovedOrOwner(msg.sender, tokenId)) {
             revert Arcane__NotOwner();
