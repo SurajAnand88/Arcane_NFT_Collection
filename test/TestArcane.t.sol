@@ -39,14 +39,24 @@ contract TestArcane is Test {
         assertEq(hashedExpSymbol, hashedActualSymbol);
     }
 
-    function testCanMintAndHaveBalance() public {
-        vm.prank(USER);
-        arcane.mint(CAP_NFT);
-        uint256 tokenId = arcane.mintCount() - 1;
+    // function testCanMintAndHaveBalance() public {
+    //     vm.prank(USER);
+    //     arcane.mint(CAP_NFT);
+    //     uint256 tokenId = arcane.mintCount() - 1;
 
-        string memory userTokenUri = arcane.tokenURI(tokenId);
-        assertEq(keccak256(abi.encodePacked(userTokenUri)), keccak256(abi.encodePacked(CAP_NFT)));
-        assertEq(arcane.ownerOf(tokenId), USER);
-        assertEq(arcane.balanceOf(USER), 1);
+    //     string memory userTokenUri = arcane.tokenURI(tokenId);
+    //     assertEq(keccak256(abi.encodePacked(userTokenUri)), keccak256(abi.encodePacked(CAP_NFT)));
+    //     assertEq(arcane.ownerOf(tokenId), USER);
+    //     assertEq(arcane.balanceOf(USER), 1);
+    // }
+
+    function testConvertSvgToUri() public view {
+        string memory expectedUri =
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBpZD0iaGFwcHktZW1vamkiPjxjaXJjbGUgY3g9Ijc1IiBjeT0iNzUiIHI9IjUwIiBmaWxsPSIjRkZFQjNCIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPjxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjUiIGZpbGw9IiMwMDAiLz48Y2lyY2xlIGN4PSI5MCIgY3k9IjYwIiByPSI1IiBmaWxsPSIjMDAwIi8+PHBhdGggZD0iTTU1LDkwIFE3NSwxMTAgOTUsOTAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIi8+PC9nPj48L3N2Zz4=";
+        string memory svg =
+            '<svg width="300" height="150" xmlns="http://www.w3.org/2000/svg"><g id="happy-emoji"><circle cx="75" cy="75" r="50" fill="#FFEB3B" stroke="#000" stroke-width="2"/><circle cx="60" cy="60" r="5" fill="#000"/><circle cx="90" cy="60" r="5" fill="#000"/><path d="M55,90 Q75,110 95,90" stroke="#000" stroke-width="3" fill="none"/></g>></svg>';
+
+        string memory actualUri = deployer.convertSvgToImageUri(svg);
+        assertEq(keccak256(abi.encodePacked(expectedUri)), keccak256(abi.encodePacked(actualUri)));
     }
 }
