@@ -27,21 +27,21 @@ contract Arcane is ERC721 {
 
     function mint() public {
         // s_tokenIdToUri[s_nftMintCount] = tokenUri;
-        s_tokenIdToMood[s_nftMintCount] = Mood.SAD;
+        s_tokenIdToMood[s_nftMintCount] = Mood.HAPPY;
         _safeMint(msg.sender, s_nftMintCount);
         s_nftMintCount++;
     }
 
-    function flipMood(uint256 tokenId) public view {
+    function flipMood(uint256 tokenId) public  {
         //only Owner can flip the mood
-        if (_isApprovedOrOwner(msg.sender, tokenId)) {
+        if (!_isApprovedOrOwner(msg.sender, tokenId)) {
             revert Arcane__NotOwner();
         }
 
         if (s_tokenIdToMood[tokenId] == Mood.HAPPY) {
-            s_tokenIdToMood[tokenId] == Mood.SAD;
+            s_tokenIdToMood[tokenId] = Mood.SAD;
         } else {
-            s_tokenIdToMood[tokenId] == Mood.HAPPY;
+            s_tokenIdToMood[tokenId] = Mood.HAPPY;
         }
     }
 
@@ -52,7 +52,7 @@ contract Arcane is ERC721 {
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         string memory imageURI;
 
-        if (s_tokenIdToMood[s_nftMintCount] == Mood.HAPPY) {
+        if (s_tokenIdToMood[tokenId] == Mood.HAPPY) {
             imageURI = s_happySvgImageUri;
         } else {
             imageURI = s_sadSvgImageUri;

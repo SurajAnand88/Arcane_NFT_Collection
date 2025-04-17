@@ -12,6 +12,9 @@ contract TestArcane is Test {
     address public USER = makeAddr("User");
     string public constant CAP_NFT = "ipfs://QmaxE9yE2J7JatcxoFaXx4JF75MbT5KtDkknDLDUzanUwX";
 
+    string public constant SAD_SVG = "data:application/json;base64,eyJuYW1lIjoiQXJjYW5lIiwgImRlc2NyaXB0aW9uIjoiQSBORlQgdGhhdCByZWZsZWN0cyB0aGUgb3duZXJzIG1vb2QuIiwgImF0dHJpYnV0ZXMiOiBbeyJ0cmFpdHNfdHlwZSI6ICJtb29kaWUiLCAidmFsdWUiOiAxMDB9XSwgImltYWdlIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTXpBd0lpQm9aV2xuYUhROUlqRTFNQ0lnZUcxc2JuTTlJbWgwZEhBNkx5OTNkM2N1ZHpNdWIzSm5Mekl3TURBdmMzWm5JajQ4WnlCcFpEMGljMkZrTFdWdGIycHBJajQ4WTJseVkyeGxJR040UFNJeU1qVWlJR041UFNJM05TSWdjajBpTlRBaUlHWnBiR3c5SWlOR1JrVkNNMElpSUhOMGNtOXJaVDBpSXpBd01DSWdjM1J5YjJ0bExYZHBaSFJvUFNJeUlpOCtQR05wY21Oc1pTQmplRDBpTWpFd0lpQmplVDBpTmpBaUlISTlJalVpSUdacGJHdzlJaU13TURBaUx6NDhZMmx5WTJ4bElHTjRQU0l5TkRBaUlHTjVQU0kyTUNJZ2NqMGlOU0lnWm1sc2JEMGlJekF3TUNJdlBqeHdZWFJvSUdROUlrMHlNVEFzTVRBd0lGRXlNalVzT0RBZ01qUXdMREV3TUNJZ2MzUnliMnRsUFNJak1EQXdJaUJ6ZEhKdmEyVXRkMmxrZEdnOUlqTWlJR1pwYkd3OUltNXZibVVpTHo0OEwyYytQQzl6ZG1jKyJ9";
+    string public constant HAPPY_SVG = "data:application/json;base64,eyJuYW1lIjoiQXJjYW5lIiwgImRlc2NyaXB0aW9uIjoiQSBORlQgdGhhdCByZWZsZWN0cyB0aGUgb3duZXJzIG1vb2QuIiwgImF0dHJpYnV0ZXMiOiBbeyJ0cmFpdHNfdHlwZSI6ICJtb29kaWUiLCAidmFsdWUiOiAxMDB9XSwgImltYWdlIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTXpBd0lpQm9aV2xuYUhROUlqRTFNQ0lnZUcxc2JuTTlJbWgwZEhBNkx5OTNkM2N1ZHpNdWIzSm5Mekl3TURBdmMzWm5JajQ4WnlCcFpEMGlhR0Z3Y0hrdFpXMXZhbWtpUGp4amFYSmpiR1VnWTNnOUlqYzFJaUJqZVQwaU56VWlJSEk5SWpVd0lpQm1hV3hzUFNJalJrWkZRak5DSWlCemRISnZhMlU5SWlNd01EQWlJSE4wY205clpTMTNhV1IwYUQwaU1pSXZQanhqYVhKamJHVWdZM2c5SWpZd0lpQmplVDBpTmpBaUlISTlJalVpSUdacGJHdzlJaU13TURBaUx6NDhZMmx5WTJ4bElHTjRQU0k1TUNJZ1kzazlJall3SWlCeVBTSTFJaUJtYVd4c1BTSWpNREF3SWk4K1BIQmhkR2dnWkQwaVRUVTFMRGt3SUZFM05Td3hNVEFnT1RVc09UQWlJSE4wY205clpUMGlJekF3TUNJZ2MzUnliMnRsTFhkcFpIUm9QU0l6SWlCbWFXeHNQU0p1YjI1bElpOCtQQzluUGo0OEwzTjJaejQ9In0=";
+
     function setUp() public {
         deployer = new DeployArcane();
         arcane = deployer.run();
@@ -58,5 +61,15 @@ contract TestArcane is Test {
 
         string memory actualUri = deployer.convertSvgToImageUri(svg);
         assertEq(keccak256(abi.encodePacked(expectedUri)), keccak256(abi.encodePacked(actualUri)));
+    }
+
+    function testFlipMoodNft() public {
+        vm.prank(USER);
+        arcane.mint();
+        vm.prank(USER);
+        arcane.flipMood(0);
+
+        assertEq(keccak256(abi.encodePacked(arcane.tokenURI(0))), keccak256(abi.encodePacked(SAD_SVG)));
+        
     }
 }
