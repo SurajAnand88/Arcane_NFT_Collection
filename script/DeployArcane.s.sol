@@ -12,9 +12,6 @@ contract DeployArcane is Script {
         string memory sadSvg = vm.readFile("./img/sad.svg");
         string memory happySvg = vm.readFile("./img/happy.svg");
 
-        console.log(sadSvg);
-        console.log(happySvg);
-
         vm.startBroadcast();
         arcane = new Arcane(convertSvgToImageUri(happySvg), convertSvgToImageUri(sadSvg));
         vm.stopBroadcast();

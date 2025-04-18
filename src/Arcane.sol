@@ -27,6 +27,7 @@ contract Arcane is ERC721 {
 
     function mint() public {
         // s_tokenIdToUri[s_nftMintCount] = tokenUri;
+        console.log(msg.sender);
         s_tokenIdToMood[s_nftMintCount] = Mood.HAPPY;
         _safeMint(msg.sender, s_nftMintCount);
         s_nftMintCount++;
