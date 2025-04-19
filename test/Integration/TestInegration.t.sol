@@ -49,6 +49,7 @@ contract TestArcane is Test {
         vm.prank(USER);
         arcane.flipMood(0);
 
+
         assertEq(keccak256(abi.encodePacked(arcane.tokenURI(0))), keccak256(abi.encodePacked(SAD_SVG)));
     }
 }

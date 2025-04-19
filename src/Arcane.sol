@@ -7,7 +7,6 @@ import {Base64} from "../lib/openzepplin-contracts/contracts/utils/Base64.sol";
 
 contract Arcane is ERC721 {
     uint256 private s_nftMintCount;
-    // mapping(uint256 => string) private s_tokenIdToUri;
     string private s_sadSvgImageUri;
     string private s_happySvgImageUri;
     mapping(uint256 => Mood) private s_tokenIdToMood;
@@ -27,7 +26,6 @@ contract Arcane is ERC721 {
 
     function mint() public {
         // s_tokenIdToUri[s_nftMintCount] = tokenUri;
-        console.log(msg.sender);
         s_tokenIdToMood[s_nftMintCount] = Mood.HAPPY;
         _safeMint(msg.sender, s_nftMintCount);
         s_nftMintCount++;

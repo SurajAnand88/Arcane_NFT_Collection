@@ -6,6 +6,7 @@ import {Test} from "forge-std/Test.sol";
 import {Arcane} from "src/Arcane.sol";
 import {console} from "forge-std/console.sol";
 import {DeployArcane} from "script/DeployArcane.s.sol";
+import {DevOpsTools} from "../../lib/foundry-devops/src/DevOpsTools.sol";
 
 contract TestInteractions is Test {
     Arcane public arcane;
@@ -44,6 +45,7 @@ contract TestInteractions is Test {
         arcane.mint();
         console.log(arcane.tokenURI(0));
     }
+
 
     modifier user() {
         vm.prank(USER);
